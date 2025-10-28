@@ -48,6 +48,6 @@ app.get("/dashboard", isLoggedIn, async (req, res) => {
   res.status(200).json({ message: "Welcome to dashboard" });
 });
 
-app.listen(port,(req,res)=>{
-    console.log(`Port is Working At ${port}`);
+app.listen(process.env.PORT,(req,res)=>{
+    console.log(`Port is Working At ${process.env.PORT}`);
 })

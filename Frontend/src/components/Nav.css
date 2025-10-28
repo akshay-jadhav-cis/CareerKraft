@@ -1,0 +1,67 @@
+/* AppBar */
+.navbar-appbar {
+  background-color: #ffffff !important;
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.08) !important;
+}
+
+/* Toolbar */
+.navbar-toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 24px !important;
+}
+
+/* Logo / Title */
+.nav-title {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.6px;
+  color: #222 !important;
+}
+
+/* Common Navbar Buttons */
+.nav-btn {
+  font-weight: 500 !important;
+  color: #444 !important;
+  text-transform: none !important;
+  border-radius: 8px !important;
+  transition: 0.25s ease-in-out !important;
+}
+
+/* Hover effect */
+.nav-btn:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Logout Button */
+.nav-logout {
+  font-weight: 600 !important;
+  text-transform: none !important;
+  border-radius: 8px !important;
+}
+
+/* Drawer Styling (Mobile Menu) */
+.drawer-container {
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px;
+  background: #ffffff;
+}
+
+/* Drawer buttons */
+.drawer-container button {
+  justify-content: flex-start !important;
+  text-transform: none !important;
+  font-size: 16px;
+  color: #333 !important;
+}
+
+/* Mobile Title */
+@media (max-width: 600px) {
+  .nav-title {
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,103 @@
+/* Backdrop */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(3px);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Main Modal Window */
+.modal-window {
+  max-width: 900px;
+  width: 100%;
+  padding: 35px 28px;
+  border-radius: 22px;
+  background: #fff;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: fadeScale 0.4s ease-in-out;
+}
+
+/* Animation */
+@keyframes fadeScale {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Close Button */
+.modal-close {
+  position: absolute !important;
+  right: 16px;
+  top: 16px;
+  background: #f3f6ff !important;
+  border-radius: 10px;
+}
+
+/* Title Styling */
+.modal-title {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.modal-blue {
+  color: #0066ff;
+}
+
+.modal-subtitle {
+  text-align: center;
+  margin-bottom: 26px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Grid & Card Styling */
+.feature-grid {
+  margin-top: 10px;
+}
+
+.feature-card {
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  cursor: default;
+  transition: transform .25s, box-shadow .25s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
+}
+
+/* Icon Container */
+.feature-icon {
+  background: #e1ecff;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 14px;
+  font-size: 28px;
+  color: #0056e0;
+}
+
+/* Text inside Card */
+.feature-title {
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+}
+
+.feature-desc {
+  color: #666;
+  margin-top: 4px;
+  line-height: 1.4;
+}

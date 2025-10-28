@@ -1,0 +1,114 @@
+/* reuse for About + Feature + any modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1300;
+}
+
+.modal-window {
+  width: 92%;
+  max-width: 1050px;
+  padding: 42px 38px;
+  border-radius: 18px;
+  position: relative;
+  text-align: center;
+  animation: modalFade 0.35s ease-out;
+}
+
+/* Modern animation */
+@keyframes modalFade {
+  from {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Close Button Positioning */
+.modal-close {
+  position: absolute !important;
+  top: 16px;
+  right: 16px;
+}
+
+/* Title Style */
+.modal-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* Blue text highlight */
+.modal-title span {
+  color: var(--primary, #007bff);
+}
+
+/* Subtitle */
+.modal-subtitle {
+  font-size: 1rem;
+  max-width: 700px;
+  margin: auto;
+  color: #636363;
+  margin-bottom: 35px;
+}
+
+/* Card Shared Design */
+.content-card {
+  width: 100%;
+  padding: 26px !important;
+  text-align: left;
+  display: flex;
+  gap: 14px;
+  align-items: start;
+  background: #fff;
+  border-radius: 16px !important;
+  box-shadow: 0px 4px 14px rgba(0,0,0,0.1) !important;
+  transition: .25s ease;
+}
+
+.content-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0px 6px 20px rgba(0,0,0,0.15) !important;
+}
+
+/* Emoji/Icon container */
+.card-icon {
+  font-size: 2rem;
+  background: #eef4ff;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+/* Mobile Design */
+@media (max-width: 600px) {
+  .modal-window {
+    padding: 30px 20px;
+  }
+  .modal-title {
+    font-size: 1.5rem;
+  }
+}
+:root {
+  --primary: #1565c0;
+  --primary-light: #1e88e5;
+  --text-dark: #1a1a1a;
+  --bg-light: #ffffff;
+  font-family: "Poppins", sans-serif;
+}
+* {
+  transition: 0.2s ease-in-out;
+}
+body {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 0;
+}

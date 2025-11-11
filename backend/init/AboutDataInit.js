@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 const about = require("../models/About");
 
-async function main() {
-  await mongoose.connect("mongodb+srv://akshayjadhav_db_user:vlW68JLM7yVLOVIE@cluster0.wpye2fm.mongodb.net/careercraft?retryWrites=true&w=majority");
-  console.log("✅ Successfully connected to MongoDB");
-}
 
 async function saveFeatures() {
   const challenges = [

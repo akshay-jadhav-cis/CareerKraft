@@ -33,9 +33,7 @@ app.use(cors({
 }));
 
 async function main(){
-   await mongoose.connect(
-  "mongodb+srv://akshayjadhav_db_user:vlW68JLM7yVLOVIE@cluster0.wpye2fm.mongodb.net/careercraft?retryWrites=true&w=majority"
-);
+   await mongoose.connect(process.env.MONGO_URL);
 
 }
 main().then(()=>{

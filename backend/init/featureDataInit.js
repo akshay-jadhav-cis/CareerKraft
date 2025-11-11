@@ -1,16 +1,13 @@
-const mongoose=require("mongoose");
-const feature=require("../models/Feature");
+const mongoose = require("mongoose");
+const feature = require("../models/Feature");
 
-async function main(){
-    await mongoose.connect('mongodb://127.0.0.1:27017/CarrerCraftDb');
+async function main() {
+  await mongoose.connect("mongodb+srv://akshayjadhav_db_user:vlW68JLM7yVLOVIE@cluster0.wpye2fm.mongodb.net/careercraft?retryWrites=true&w=majority");
+  console.log("✅ Successfully connected to MongoDB");
 }
-main().then(()=>{
-    console.log("Successfully Mongoose Connection ");
-}).catch((e)=>{
-    console.log("Error Occurred in MongoDb = " ,e);
-})
-async function saveFeatures(){
-     const features = [
+
+async function saveFeatures() {
+  const features = [
     { icon: "🎯", title: "Personalized Roadmaps", desc: "AI-driven learning paths..." },
     { icon: "⚡", title: "Daily Learning Tasks", desc: "Structured daily assignments..." },
     { icon: "🤖", title: "AI Chatbot Mentor", desc: "Get instant help..." },
@@ -18,6 +15,21 @@ async function saveFeatures(){
     { icon: "📊", title: "Progress Analytics", desc: "Visualize your learning journey..." },
     { icon: "💬", title: "Real-time Support", desc: "Access mentorship whenever..." }
   ];
+
   await feature.insertMany(features);
+  console.log("✅ Features Saved Successfully");
 }
-saveFeatures().then(console.log("Saved Succesfully"));
+
+async function run() {
+  try {
+    await main();         // connect to DB
+    await saveFeatures(); // insert data
+  } catch (err) {
+    console.error("❌ Error:", err);
+  } finally {
+    await mongoose.connection.close();
+    console.log("🔌 MongoDB connection closed");
+  }
+}
+
+run();

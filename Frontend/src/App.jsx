@@ -4,7 +4,7 @@ import Nav from "./components/Nav";
 import HomePage from "./HomePage";
 import UserLogin from "./users/UserLogin";
 import UserSignup from "./users/UserSignup";
-import Dashboard from "./studymaterial/Dashboard";
+import Dashboard from "./studymaterial/DashBoard";
 import Feature from "./components/Feature";
 import Footer from "./components/Footer";
 import About from "./components/About";

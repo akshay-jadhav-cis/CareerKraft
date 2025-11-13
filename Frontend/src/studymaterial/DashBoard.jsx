@@ -16,10 +16,11 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("User");
 
-  useEffect(() => {
-    const name = localStorage.getItem("username") || "User";
-    setUsername(name);
-  }, []);
+ useEffect(() => {
+  const savedUser = JSON.parse(localStorage.getItem("user"));
+  setUsername(savedUser?.name || "User");
+}, []);
+
 
   return (
     <div className="dashboard-bg">

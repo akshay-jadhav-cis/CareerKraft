@@ -11,11 +11,5 @@ export default defineConfig({
   },
   server: {
     port: 2000,
-    proxy: {
-      "/users": "http://localhost:5000",
-      "/dashboard": "http://localhost:5000",
-      "/features": "http://localhost:5000",
-      "/about":"http://localhost:5000"
-    },
   },
 });

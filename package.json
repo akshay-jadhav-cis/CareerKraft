@@ -18,6 +18,11 @@
     "@mui/material": "^7.3.4",
     "axios": "^1.12.2",
     "dotenv": "^17.2.3",
-    "lucide-react": "^0.548.0"
+    "express-session": "^1.18.2",
+    "lucide-react": "^0.548.0",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "qrcode": "^1.5.4",
+    "speakeasy": "^2.0.0"
   }
 }

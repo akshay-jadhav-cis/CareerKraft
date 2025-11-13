@@ -3,11 +3,18 @@ const userRoute = express.Router();
 const users = require("../models/User");
 const { hashCompare, hashPassword } = require("../utils/Password");
 const isLoggedIn=require("../utils/middleware");
+userRoute.get("/check-auth", (req, res) => {
+  if (req.session.user) {
+    return res.json({ isLoggedIn: true, user: req.session.user });
+  }
+  res.json({ isLoggedIn: false });
+});
+
 // ✅ Signup Route
 userRoute.post("/signup", async (req, res) => {
   try {
     const { User } = req.body;
-    
+    console.log(User)
     const existingUser = await users.findOne({ email: User.email });
     if (existingUser)
       return res.status(400).json({ error: "Email already registered!" });
@@ -18,44 +25,54 @@ userRoute.post("/signup", async (req, res) => {
       class: User.class,
       college: User.college,
       email: User.email,
+      twoFactorEnabled: false,
+      twoFactorSecret: "",
     });
 
     await newUser.save();
 
-    req.session.user = { name: newUser.name, email: newUser.email };
-
-    res.status(201).json({
-      message: "Signup Successful",
-      user: req.session.user
+    res.json({
+      step: "2fa-required",
+      email: User.email,
+      message: "Continue with QR code verification",
     });
-
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Server error during signup" });
   }
 });
+
 userRoute.post("/login", async (req, res) => {
   try {
     const { User } = req.body;
-    const user = await users.findOne({ email: User.email });
 
-    if (!user) return res.status(404).json({ error: "User does not exist" });
+    const user = await users.findOne({ email: User.email });
+    if (!user) return res.status(404).json({ error: "User not found" });
 
     const validPassword = await hashCompare(User.password, user.password);
     if (!validPassword)
       return res.status(401).json({ error: "Incorrect password" });
 
+    // If 2FA enabled → ask for OTP
+    if (user.twoFactorEnabled) {
+      return res.json({
+        step: "otp-required",
+        email: User.email,
+      });
+    }
+
+    // Normal login without 2FA
     req.session.user = { name: user.name, email: user.email };
 
-    res.json({
-      message: "Login successful",
-      user: req.session.user
+    return res.json({
+      success: true,
+      user: req.session.user,
     });
-
   } catch (err) {
     res.status(500).json({ error: "Server error during login" });
   }
 });
+
 userRoute.get("/logout", isLoggedIn,(req, res) => {
   req.session.destroy(() => {
     res.clearCookie("connect.sid");

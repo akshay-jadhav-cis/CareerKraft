@@ -19,8 +19,8 @@ async function saveFeatures() {
 
 async function run() {
   try {
-    await main();         // connect to DB
-    await saveFeatures(); // insert data
+    await main();        
+    await saveFeatures();
   } catch (err) {
     console.error("❌ Error:", err);
   } finally {

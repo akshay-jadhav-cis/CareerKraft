@@ -26,7 +26,9 @@ export default function Nav({ onFeaturesClick, onAboutClick, isLoggedIn, onLogou
 
       {isLoggedIn ? (
         <>
-          <Button component={Link} to="/dashboard" color="inherit">Dashboard</Button>
+          <Button component={Link} to="/dashboard" color="inherit">
+            Dashboard
+          </Button>
           <Button
             color="error"
             onClick={onLogout}
@@ -38,7 +40,12 @@ export default function Nav({ onFeaturesClick, onAboutClick, isLoggedIn, onLogou
       ) : (
         <>
           <Button component={Link} to="/login" color="inherit">Login</Button>
-          <Button component={Link} to="/signup" variant="outlined" sx={{ ml: 1 }}>
+          <Button
+            component={Link}
+            to="/signup"
+            variant="outlined"
+            sx={{ ml: 1 }}
+          >
             Signup
           </Button>
         </>
@@ -61,7 +68,7 @@ export default function Nav({ onFeaturesClick, onAboutClick, isLoggedIn, onLogou
           component={Link}
           to="/"
         >
-          Carreer Kraft
+          Career Kraft
         </Typography>
 
         {!isMobile ? (
@@ -72,7 +79,9 @@ export default function Nav({ onFeaturesClick, onAboutClick, isLoggedIn, onLogou
 
             {isLoggedIn ? (
               <>
-                <Button className="nav-btn" component={Link} to="/dashboard">Dashboard</Button>
+                <Button className="nav-btn" component={Link} to="/dashboard">
+                  Dashboard
+                </Button>
                 <Button
                   className="nav-logout"
                   color="error"
@@ -84,8 +93,15 @@ export default function Nav({ onFeaturesClick, onAboutClick, isLoggedIn, onLogou
               </>
             ) : (
               <>
-                <Button className="nav-btn" component={Link} to="/login">Login</Button>
-                <Button className="nav-btn" component={Link} to="/signup" variant="outlined">
+                <Button className="nav-btn" component={Link} to="/login">
+                  Login
+                </Button>
+                <Button
+                  className="nav-btn"
+                  component={Link}
+                  to="/signup"
+                  variant="outlined"
+                >
                   Signup
                 </Button>
               </>
@@ -98,12 +114,16 @@ export default function Nav({ onFeaturesClick, onAboutClick, isLoggedIn, onLogou
         )}
       </Toolbar>
 
-      <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+      {/* Drawer for Mobile */}
+      <Drawer
+        anchor="right"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      >
         <Box className="drawer-container" onClick={() => setDrawerOpen(false)}>
           {menuItems}
         </Box>
       </Drawer>
     </AppBar>
-
   );
 }

@@ -1,0 +1,47 @@
+.js-container {
+  padding: 40px;
+  background: #f9fafb;
+  min-height: 100vh;
+}
+
+.js-title {
+  text-align: center;
+  color: #1976d2;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.js-subtitle {
+  text-align: center;
+  color: #444;
+  margin-bottom: 35px;
+  font-size: 18px;
+}
+
+.js-card {
+  padding: 15px;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.js-card:hover {
+  transform: translateY(-6px);
+}
+
+.js-day-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.js-task {
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.js-btn-box {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}

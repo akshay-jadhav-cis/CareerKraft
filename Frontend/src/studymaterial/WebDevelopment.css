@@ -1,0 +1,63 @@
+/* Global Container */
+.webdev-container {
+  min-height: 100vh;
+  background: #f5f7fa;
+  padding: 40px 30px;
+}
+
+/* Title Styling */
+.webdev-title {
+  text-align: center;
+  font-weight: 700 !important;
+  color: #1976d2;
+  margin-bottom: 40px !important;
+}
+
+/* Grid Spacing Fix */
+.webdev-grid {
+  padding-bottom: 30px;
+}
+
+/* Card Styling */
+.webdev-card {
+  border-radius: 18px !important;
+  padding: 5px;
+  transition: 0.3s ease-in-out !important;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.webdev-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Card Title */
+.webdev-card-title {
+  font-weight: 600 !important;
+  margin-bottom: 12px !important;
+}
+
+/* Description */
+.webdev-card-desc {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 18px !important;
+  line-height: 1.5;
+}
+
+/* Duration Text */
+.webdev-card-days {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Button Styling */
+.webdev-btn {
+  padding: 10px 0 !important;
+  background: #1976d2 !important;
+  border-radius: 10px !important;
+}

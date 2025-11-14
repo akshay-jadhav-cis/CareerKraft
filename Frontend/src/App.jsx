@@ -15,6 +15,14 @@ import TwoFALogin from "./users/TwoFALogin";
 
 import { ThemeProvider } from "@mui/material";
 import theme from "./theme";
+import Placements from "./studymaterial/Placements";
+import Aids from "./studymaterial/Aids";
+import Devops from "./studymaterial/Devops";
+import DSA from "./studymaterial/DSA";
+import WebDevelopment from "./studymaterial/WebDevelopment";
+import Html from "./studymaterial/webdevelopment/Html";
+import Css from "./studymaterial/webdevelopment/CSS";
+import Js from "./studymaterial/webdevelopment/Js";
 
 function App() {
   const navigate=useNavigate();
@@ -22,8 +30,6 @@ function App() {
   const [showAbouts, setShowAbouts] = useState(false);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // 🔥 Check login status on page load
   useEffect(() => {
     fetch("http://localhost:5000/users/check-auth", {
       credentials: "include",
@@ -32,8 +38,6 @@ function App() {
       .then((data) => setIsLoggedIn(data.isLoggedIn))
       .catch(() => setIsLoggedIn(false));
   }, []);
-
-  // 🔥 Logout function
   const handleLogout = async () => {
     await fetch("http://localhost:5000/users/logout", {
       method: "GET",
@@ -78,6 +82,14 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/dashboard/placements" element={<Placements/>}/>
+        <Route path="/dashboard/placements/ai-data-science" element={<Aids/>}/>
+        <Route path="/dashboard/placements/devops" element={<Devops/>}/>
+        <Route path="/dashboard/placements/dsa" element={<DSA/>}/>
+        <Route path="/dashboard/placements/web-development" element={<WebDevelopment/>}/>
+        <Route path="/dashboard/placements/web-development/Html" element={<Html/>}/>
+        <Route path="/dashboard/placements/web-development/css" element={<Css/>}/>
+        <Route path="/dashboard/placements/web-development/js" element={<Js/>}/>
       </Routes>
 
       <Feature visible={showFeatures} onClose={() => setShowFeatures(false)} />

@@ -68,7 +68,7 @@ export default function Nav({ onFeaturesClick, onAboutClick, isLoggedIn, onLogou
           component={Link}
           to="/"
         >
-          Career Kraft
+          Career<span style={{color:"blue"}}>Kraft</span>
         </Typography>
 
         {!isMobile ? (

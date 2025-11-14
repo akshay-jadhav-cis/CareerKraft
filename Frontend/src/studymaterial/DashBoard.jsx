@@ -11,15 +11,16 @@ import { useNavigate } from "react-router-dom";
 import { Briefcase, GraduationCap } from "lucide-react";
 
 import "./Dashboard.css"; // ✅ Imported Custom CSS
+import Placements from "./Placements";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("User");
 
- useEffect(() => {
-  const savedUser = JSON.parse(localStorage.getItem("user"));
-  setUsername(savedUser?.name || "User");
-}, []);
+  useEffect(() => {
+    const savedUser = JSON.parse(localStorage.getItem("user"));
+    setUsername(savedUser?.name || "User");
+  }, []);
 
 
   return (
@@ -35,7 +36,7 @@ const Dashboard = () => {
 
         {/* Cards Section */}
         <Grid container spacing={4} justifyContent="center" className="card-section">
-          
+
           {/* Placements Card */}
           <Grid item xs={12} md={5}>
             <Card className="dash-card">
@@ -67,10 +68,11 @@ const Dashboard = () => {
                   variant="contained"
                   fullWidth
                   className="choose-btn"
-                  onClick={() => navigate("/placements")}
+                  onClick={() => navigate("/dashboard/placements")}
                 >
-                  Choose Placements
+                  Placements
                 </Button>
+
               </CardContent>
             </Card>
           </Grid>

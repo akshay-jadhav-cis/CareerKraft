@@ -1,43 +1,53 @@
+require("dotenv").config({ path: "../.env" }); 
+
 const mongoose = require("mongoose");
-const about = require("../models/About");
+const About = require("../models/About");
 
+//🔹 MongoDB connection
+// async function connectDB() {
+//   await mongoose.connect(process.env.MONGO_URL);
+//   console.log("✅ MongoDB Connected");
+// }
 
-async function saveFeatures() {
+// 🔹 Seed data
+async function saveAboutData() {
   const challenges = [
     {
-      icon: "🎯",
+      icon: "psychology",
       title: "Generic Learning Paths",
       description:
         "Students follow one-size-fits-all curricula without understanding what truly aligns with their career goals.",
     },
     {
-      icon: "📈",
+      icon: "star",
       title: "Lack of Consistency",
       description:
         "Without structured goals and progress tracking, students lose motivation and break their learning flow.",
     },
     {
-      icon: "👥",
-      title: "Education-Industry Gap",
+      icon: "person",
+      title: "Education–Industry Gap",
       description:
         "Academic learning rarely matches industry expectations, creating a disconnect between education and career readiness.",
     },
     {
-      icon: "💬",
+      icon: "award",
       title: "No Real-time Mentorship",
       description:
         "Students need instant help and guidance but traditional methods can't provide on-demand support.",
     },
   ];
 
-  await about.insertMany(challenges);
-  console.log("✅ Data Saved Successfully!");
+  await About.deleteMany({});
+  await About.insertMany(challenges);
+
+  console.log("✅ About data saved successfully!");
 }
 
 async function run() {
   try {
-    await main();
-    await saveFeatures();
+     await connectDB();
+    await saveAboutData();
   } catch (err) {
     console.error("❌ Error Occurred:", err);
   } finally {

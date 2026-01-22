@@ -1,61 +1,54 @@
-/* Backdrop */
+/* Dark background overlay */
 .modal-backdrop {
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  backdrop-filter: blur(3px);
-  z-index: 2000;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1300;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 20px;
+  justify-content: center;
 }
 
-/* Main Modal Window */
+/* Modal box */
 .modal-window {
-  max-width: 900px;
-  width: 100%;
-  padding: 35px 28px;
-  border-radius: 22px;
-  background: #fff;
-  max-height: 90vh;
+  background: #ffffff;
+  width: 90%;
+  max-width: 1100px;
+  max-height: 85vh;
   overflow-y: auto;
-  animation: fadeScale 0.4s ease-in-out;
+  border-radius: 12px;
+  padding: 30px;
+  position: relative;
+  z-index: 1400;
 }
 
-/* Animation */
-@keyframes fadeScale {
-  from { opacity: 0; transform: scale(0.92); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-/* Close Button */
+/* Close button */
 .modal-close {
-  position: absolute !important;
-  right: 16px;
-  top: 16px;
-  background: #f3f6ff !important;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+/* Feature cards */
+.feature-grid {
+  margin-top: 30px;
+}
+
+.feature-card {
+  display: flex;
+  gap: 15px;
+  padding: 20px;
   border-radius: 10px;
 }
 
-/* Title Styling */
-.modal-title {
-  text-align: center;
-  font-weight: 700;
-  margin-bottom: 10px;
-  font-family: 'Poppins', sans-serif;
+.feature-icon {
+  font-size: 32px;
+  color: #1976d2;
 }
 
-.modal-blue {
-  color: #0066ff;
-}
-
-.modal-subtitle {
-  text-align: center;
-  margin-bottom: 26px;
-  color: #555;
-  line-height: 1.5;
-}
 
 /* Grid & Card Styling */
 .feature-grid {

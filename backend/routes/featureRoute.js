@@ -1,19 +1,18 @@
 const express = require("express");
-const feature = require("../models/Feature"); 
+const Feature = require("../models/Feature");
 const featureRoute = express.Router();
 
 featureRoute.get("/all", async (req, res) => {
   try {
-    const features = await feature.find(); 
+    const features = await Feature.find(); // ✅ FIXED
 
-    if (!features || features.length === 0) {
-      return res.status(404).json({ data: "No features found" });
-    }
-
-    res.json(features);
+    res.json({
+      success: true,
+      features: features,
+    });
   } catch (e) {
     console.error("Error fetching features:", e);
-    res.status(500).json({ data: "Error occurred" });
+    res.status(500).json({ success: false, message: "Error occurred" });
   }
 });
 

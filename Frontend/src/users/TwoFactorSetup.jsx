@@ -1,132 +1,121 @@
 import React, { useEffect, useState } from "react";
 import {
-    Box,
-    Paper,
-    Typography,
-    Button,
-    TextField,
-    Snackbar,
-    Alert,
+  Box,
+  Paper,
+  Typography,
+  Button,
+  TextField,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export default function TwoFactorSetup() {
-    const location = useLocation();
-    const navigate = useNavigate();
+export default function TwoFactorSetup({ onAuthSuccess }) {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const email = location.state?.email;
 
-    const email = location.state?.email;
+  const [qr, setQr] = useState("");
+  const [otp, setOtp] = useState("");
 
-    const [qr, setQr] = useState("");
-    const [secret, setSecret] = useState("");
-    const [otp, setOtp] = useState("");
+  const [alert, setAlert] = useState({
+    open: false,
+    message: "",
+    severity: "error",
+  });
 
-    const [alert, setAlert] = useState({
-        open: false,
-        message: "",
-        severity: "error",
+  // 🚨 If no email → redirect
+  useEffect(() => {
+    if (!email) navigate("/signup");
+  }, [email, navigate]);
+
+  // 📡 Fetch QR
+  useEffect(() => {
+    async function fetchQR() {
+      const res = await fetch("http://localhost:5000/2fa/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+      setQr(data.qr);
+    }
+    fetchQR();
+  }, [email]);
+
+  // ✅ Verify OTP
+  const verifyOTP = async () => {
+    const res = await fetch("http://localhost:5000/2fa/verify-signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ email, token: otp }),
     });
 
-    // Redirect if email missing
-    useEffect(() => {
-        if (!email) navigate("/signup");
-    }, [email]);
+    const data = await res.json();
 
-    // Fetch QR Code
-    useEffect(() => {
-        async function fetchQR() {
-            const res = await fetch("http://localhost:5000/2fa/generate", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email }),
-            });
+    if (!data.success) {
+      return setAlert({
+        open: true,
+        message: data.error || "Invalid OTP",
+        severity: "error",
+      });
+    }
 
-            const data = await res.json();
-            setQr(data.qr);
-            setSecret(data.secret);
-        }
-        fetchQR();
-    }, [email]);
+    // 🔥 Update React auth state
+    await onAuthSuccess();
 
-    const verifyOTP = async () => {
-        const res = await fetch("http://localhost:5000/2fa/verify-signup", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, secret, token: otp }),
-        });
+    navigate("/dashboard", { replace: true });
+  };
 
-        const data = await res.json();
+  return (
+    <Box
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Paper sx={{ p: 4, maxWidth: 420 }}>
+        <Typography variant="h5" align="center">
+          Set Up Google Authenticator
+        </Typography>
 
-        if (data.success) {
-            // Save full user
-            localStorage.setItem("user", JSON.stringify(data.user));
+        {qr ? (
+          <img src={qr} alt="QR" style={{ width: "100%", marginTop: 20 }} />
+        ) : (
+          <Typography align="center" sx={{ mt: 2 }}>
+            Loading QR...
+          </Typography>
+        )}
 
-            navigate("/dashboard");
-        } else {
-            setAlert({
-                open: true,
-                message: data.error || "Invalid OTP",
-                severity: "error",
-            });
-        }
-    };
+        <TextField
+          fullWidth
+          label="Enter 6-digit OTP"
+          value={otp}
+          onChange={(e) => setOtp(e.target.value)}
+          sx={{ mt: 3 }}
+        />
 
-    return (
-        <Box
-            sx={{
-                minHeight: "100vh",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                background: "linear-gradient(to right, #f8f9fa, #e9ecef)",
-            }}
+        <Button
+          fullWidth
+          variant="contained"
+          sx={{ mt: 2 }}
+          onClick={verifyOTP}
         >
-            <Paper elevation={6} sx={{ p: 4, borderRadius: "20px", maxWidth: 420 }}>
-                <Typography variant="h5" align="center">
-                    Set Up Google Authenticator
-                </Typography>
+          Verify OTP
+        </Button>
 
-                <Typography sx={{ mt: 2 }}>
-                    Scan this QR code using Google Authenticator:
-                </Typography>
-
-                {qr ? (
-                    <img
-                        src={qr}
-                        alt="QR Code"
-                        style={{ width: "100%", marginTop: "20px" }}
-                    />
-                ) : (
-                    <Typography sx={{ mt: 3, textAlign: "center" }}>
-                        Loading QR Code...
-                    </Typography>
-                )}
-
-
-                <TextField
-                    fullWidth
-                    label="Enter 6-digit OTP"
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value)}
-                    sx={{ mt: 3 }}
-                />
-
-                <Button
-                    variant="contained"
-                    fullWidth
-                    sx={{ mt: 2, py: 1 }}
-                    onClick={verifyOTP}
-                >
-                    Verify OTP
-                </Button>
-
-                <Snackbar
-                    open={alert.open}
-                    autoHideDuration={4000}
-                    onClose={() => setAlert({ ...alert, open: false })}
-                >
-                    <Alert severity={alert.severity}>{alert.message}</Alert>
-                </Snackbar>
-            </Paper>
-        </Box>
-    );
+        <Snackbar
+          open={alert.open}
+          autoHideDuration={4000}
+          onClose={() => setAlert({ ...alert, open: false })}
+        >
+          <Alert severity="error">{alert.message}</Alert>
+        </Snackbar>
+      </Paper>
+    </Box>
+  );
 }

@@ -4,50 +4,67 @@ const speakeasy = require("speakeasy");
 const qrcode = require("qrcode");
 const users = require("../models/User");
 
+/* =========================
+   GENERATE QR (SIGNUP)
+========================= */
 router.post("/generate", async (req, res) => {
   try {
     const { email } = req.body;
 
+    const user = await users.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // 🔐 Generate secret ONCE
     const secret = speakeasy.generateSecret({
+      length: 20,
       name: `CareerKraft (${email})`,
     });
 
+    // 🔐 Save secret in DB
+    user.twoFactorSecret = secret.base32;
+    user.twoFactorEnabled = false;
+    await user.save();
+
+    // 📷 Generate QR
     const qr = await qrcode.toDataURL(secret.otpauth_url);
 
-    res.json({
-      qr,
-      secret: secret.base32,
-    });
+    res.json({ qr });
   } catch (err) {
-    console.log("QR GENERATE ERROR:", err);
+    console.error("QR GENERATE ERROR:", err);
     res.status(500).json({ error: "Failed to generate QR" });
   }
 });
+
+/* =========================
+   VERIFY OTP (SIGNUP)
+========================= */
 router.post("/verify-signup", async (req, res) => {
   try {
-    const { email, secret, token } = req.body;
+    const { email, token } = req.body;
+
+    const user = await users.findOne({ email });
+    if (!user || !user.twoFactorSecret) {
+      return res.status(400).json({ error: "2FA not initialized" });
+    }
 
     const verified = speakeasy.totp.verify({
-      secret,
+      secret: user.twoFactorSecret,
       encoding: "base32",
       token,
-      window: 1,
+      window: 2, // ⏱ handle time drift
     });
 
     if (!verified) {
-      return res.status(400).json({ error: "Invalid OTP" });
+      return res.status(401).json({ error: "Invalid OTP" });
     }
 
-    // 🟢 Update user with 2FA secret
-    await users.updateOne(
-      { email },
-      { twoFactorEnabled: true, twoFactorSecret: secret }
-    );
+    // ✅ Enable 2FA
+    user.twoFactorEnabled = true;
+    await user.save();
 
-    // 🟢 Fetch updated user
-    const user = await users.findOne({ email });
-
-    // 🟢 Auto-login the user
+    // ✅ Auto-login
     req.session.user = {
       name: user.name,
       email: user.email,
@@ -57,43 +74,46 @@ router.post("/verify-signup", async (req, res) => {
       success: true,
       user: req.session.user,
     });
-
   } catch (err) {
-    console.log("VERIFY SIGNUP ERROR:", err);
+    console.error("VERIFY SIGNUP ERROR:", err);
     res.status(500).json({ error: "Server error" });
   }
 });
 
-// ----------------------------
-// 3️⃣ VERIFY OTP DURING LOGIN
-// ----------------------------
+/* =========================
+   VERIFY OTP (LOGIN)
+========================= */
 router.post("/verify-login", async (req, res) => {
   try {
     const { email, otp } = req.body;
 
     const user = await users.findOne({ email });
-    if (!user) return res.status(400).json({ error: "User not found" });
+    if (!user || !user.twoFactorSecret) {
+      return res.status(400).json({ error: "User not found or 2FA disabled" });
+    }
 
     const verified = speakeasy.totp.verify({
       secret: user.twoFactorSecret,
       encoding: "base32",
       token: otp,
-      window: 1,
+      window: 2,
     });
 
     if (!verified) {
-      return res.status(400).json({ error: "Invalid OTP" });
+      return res.status(401).json({ error: "Invalid OTP" });
     }
 
-    
-    req.session.user = { name: user.name, email: user.email };
+    req.session.user = {
+      name: user.name,
+      email: user.email,
+    };
 
     res.json({
       success: true,
       user: req.session.user,
     });
   } catch (err) {
-    console.log("LOGIN OTP VERIFY ERROR:", err);
+    console.error("LOGIN OTP ERROR:", err);
     res.status(500).json({ error: "Server error" });
   }
 });

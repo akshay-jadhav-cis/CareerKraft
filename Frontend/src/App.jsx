@@ -25,19 +25,30 @@ import Css from "./studymaterial/webdevelopment/CSS";
 import Js from "./studymaterial/webdevelopment/Js";
 
 function App() {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+
   const [showFeatures, setShowFeatures] = useState(false);
   const [showAbouts, setShowAbouts] = useState(false);
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // ✅ SINGLE SOURCE OF TRUTH
+  const checkAuth = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/users/check-auth", {
+        credentials: "include",
+      });
+      const data = await res.json();
+      setIsLoggedIn(data.isLoggedIn);
+    } catch {
+      setIsLoggedIn(false);
+    }
+  };
+
+  // 🔁 Run once on app load
   useEffect(() => {
-    fetch("http://localhost:5000/users/check-auth", {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((data) => setIsLoggedIn(data.isLoggedIn))
-      .catch(() => setIsLoggedIn(false));
+    checkAuth();
   }, []);
+
   const handleLogout = async () => {
     await fetch("http://localhost:5000/users/logout", {
       method: "GET",
@@ -45,7 +56,7 @@ function App() {
     });
 
     setIsLoggedIn(false);
-    navigate("/"); 
+    navigate("/");
   };
 
   return (
@@ -62,18 +73,22 @@ function App() {
 
         <Route
           path="/login"
-          element={<UserLogin onLogin={() => setIsLoggedIn(true)} />}
+          element={<UserLogin onLogin={checkAuth} />}
+        />
+
+        <Route path="/signup" element={<UserSignup />} />
+
+        <Route
+          path="/2fa-setup"
+          element={<TwoFactorSetup onAuthSuccess={checkAuth} />}
         />
 
         <Route
-          path="/signup"
-          element={<UserSignup onSignup={() => setIsLoggedIn(true)} />}
+          path="/2fa-login"
+          element={<TwoFALogin onAuthSuccess={checkAuth} />}
         />
 
-        <Route path="/2fa-setup" element={<TwoFactorSetup />} />
-        <Route path="/2fa-login" element={<TwoFALogin />} />
-
-        {/* Protected Dashboard */}
+        {/* 🔒 PROTECTED */}
         <Route
           path="/dashboard"
           element={
@@ -82,14 +97,15 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/dashboard/placements" element={<Placements/>}/>
-        <Route path="/dashboard/placements/ai-data-science" element={<Aids/>}/>
-        <Route path="/dashboard/placements/devops" element={<Devops/>}/>
-        <Route path="/dashboard/placements/dsa" element={<DSA/>}/>
-        <Route path="/dashboard/placements/web-development" element={<WebDevelopment/>}/>
-        <Route path="/dashboard/placements/web-development/Html" element={<Html/>}/>
-        <Route path="/dashboard/placements/web-development/css" element={<Css/>}/>
-        <Route path="/dashboard/placements/web-development/js" element={<Js/>}/>
+
+        <Route path="/dashboard/placements" element={<Placements />} />
+        <Route path="/dashboard/placements/ai-data-science" element={<Aids />} />
+        <Route path="/dashboard/placements/devops" element={<Devops />} />
+        <Route path="/dashboard/placements/dsa" element={<DSA />} />
+        <Route path="/dashboard/placements/web-development" element={<WebDevelopment />} />
+        <Route path="/dashboard/placements/web-development/Html" element={<Html />} />
+        <Route path="/dashboard/placements/web-development/css" element={<Css />} />
+        <Route path="/dashboard/placements/web-development/js" element={<Js />} />
       </Routes>
 
       <Feature visible={showFeatures} onClose={() => setShowFeatures(false)} />

@@ -13,7 +13,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function UserLogin({ onLogin }) {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ email: "" });
   const [alert, setAlert] = useState({
     open: false,
     message: "",
@@ -23,57 +23,52 @@ export default function UserLogin({ onLogin }) {
   const navigate = useNavigate();
 
   const handleChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ email: e.target.value });
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  try {
-    const res = await fetch("http://localhost:5000/users/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({ User: formData }),
-    });
+    try {
+      const res = await fetch("http://localhost:5000/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          User: { email: formData.email },
+        }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    // CASE 1 → 2FA required
-    if (data.step === "otp-required") {
-      navigate("/2fa-login", { state: { email: data.email } });
-      return;
+      // 👉 OTP required
+      if (data.step === "otp-required") {
+        navigate("/2fa-login", {
+          state: { email: data.email },
+        });
+        return;
+      }
+
+      // 👉 Normal login (no 2FA)
+      if (data.success) {
+        if (typeof onLogin === "function") onLogin();
+        navigate("/dashboard");
+        return;
+      }
+
+      // 👉 Error
+      setAlert({
+        open: true,
+        message: data.error || "Login failed",
+        severity: "error",
+      });
+    } catch (err) {
+      setAlert({
+        open: true,
+        message: "Server Error",
+        severity: "error",
+      });
     }
-
-    // CASE 2 → Normal login
-    if (data.success) {
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ name: data.user.name, email: data.user.email })
-      );
-
-      if (typeof onLogin === "function") onLogin();
-
-      navigate("/dashboard");
-      return;
-    }
-
-    // CASE 3 → Error
-    setAlert({
-      open: true,
-      message: data.error || "Login failed",
-      severity: "error",
-    });
-
-  } catch (err) {
-    setAlert({
-      open: true,
-      message: "Server Error",
-      severity: "error",
-    });
-  }
-};
-
-
+  };
 
   return (
     <Box
@@ -99,28 +94,17 @@ export default function UserLogin({ onLogin }) {
           align="center"
           sx={{ mb: 3, color: "#1976d2", fontWeight: 600 }}
         >
-          User Login
+          Login with Email
         </Typography>
 
-        {/* FORM */}
+        {/* LOGIN FORM */}
         <form onSubmit={handleSubmit}>
           <TextField
             fullWidth
-            label="Email"
+            label="Email Address"
             name="email"
             type="email"
             value={formData.email}
-            onChange={handleChange}
-            required
-            sx={{ mb: 2 }}
-          />
-
-          <TextField
-            fullWidth
-            label="Password"
-            name="password"
-            type="password"
-            value={formData.password}
             onChange={handleChange}
             required
             sx={{ mb: 3 }}
@@ -137,11 +121,11 @@ export default function UserLogin({ onLogin }) {
               mb: 2,
             }}
           >
-            Login
+            Continue
           </Button>
         </form>
 
-        {/* GOOGLE LOGIN BUTTON */}
+        {/* GOOGLE LOGIN */}
         <Button
           fullWidth
           variant="outlined"
@@ -169,7 +153,7 @@ export default function UserLogin({ onLogin }) {
         </Typography>
       </Paper>
 
-      {/* ALERT MESSAGE */}
+      {/* ALERT */}
       <Snackbar
         open={alert.open}
         autoHideDuration={4000}

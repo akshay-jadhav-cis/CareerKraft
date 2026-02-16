@@ -1,0 +1,47 @@
+.sheet-container {
+  padding: 40px 20px;
+  background-color: #f9fafc;
+  min-height: 100vh;
+}
+
+.sheet-title {
+  text-align: center;
+  font-weight: 600 !important;
+  color: #1f2937;
+}
+
+.sheet-card {
+  max-width: 800px;
+  margin: 40px auto;
+  border-radius: 16px !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+.sheet-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.sheet-card ul {
+  margin-top: 15px;
+  padding-left: 20px;
+}
+
+.sheet-card li {
+  margin-bottom: 8px;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.sheet-card p,
+.sheet-card span,
+.sheet-card div {
+  color: #4b5563;
+  font-size: 15px;
+}
+
+.sheet-highlight {
+  font-weight: 600;
+  color: #dc2626; /* DSA red theme */
+}

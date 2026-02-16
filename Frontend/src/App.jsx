@@ -40,6 +40,13 @@ import DataAnalytics from "./studymaterial/aids/DataAnalytics";
 import Statistics from "./studymaterial/aids/Statistics";
 import DeepLearning from "./studymaterial/aids/DeepLearnig";
 import AiMiniProject from "./studymaterial/aids/AiMiniProject";
+import Month1 from "./studymaterial/dsa/Month1";
+import Month2 from "./studymaterial/dsa/Month2";
+import Month3 from "./studymaterial/dsa/Month3";
+import Month4 from "./studymaterial/dsa/Month4";
+import Month5 from "./studymaterial/dsa/Month5";
+ import Month6 from "./studymaterial/dsa/Month6";
+import DSA450 from "./studymaterial/dsa/Dsa450";
 function App() {
   const navigate = useNavigate();
 
@@ -166,33 +173,40 @@ function App() {
           element={<ProtectedRoute isLoggedIn={isLoggedIn}><MockDevopsTest /></ProtectedRoute>} />
         <Route
           path="/dashboard/placements/ai-data-science/python"
-          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Python/></ProtectedRoute>}
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Python /></ProtectedRoute>}
         />
 
         <Route
           path="/dashboard/placements/ai-data-science/data-analytics"
-          element={<ProtectedRoute isLoggedIn={isLoggedIn}><DataAnalytics/></ProtectedRoute>}
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><DataAnalytics /></ProtectedRoute>}
         />
 
         <Route
           path="/dashboard/placements/ai-data-science/statistics"
-          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Statistics/></ProtectedRoute>}
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Statistics /></ProtectedRoute>}
         />
 
         <Route
           path="/dashboard/placements/ai-data-science/ml"
-          element={<ProtectedRoute isLoggedIn={isLoggedIn}><ML/></ProtectedRoute>}
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><ML /></ProtectedRoute>}
         />
 
         <Route
           path="/dashboard/placements/ai-data-science/deep-learning"
-          element={<ProtectedRoute isLoggedIn={isLoggedIn}><DeepLearning/></ProtectedRoute>}
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><DeepLearning /></ProtectedRoute>}
         />
 
         <Route
           path="/dashboard/placements/ai-data-science/capstone"
-          element={<ProtectedRoute isLoggedIn={isLoggedIn}><AiMiniProject/></ProtectedRoute>}
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><AiMiniProject /></ProtectedRoute>}
         />
+        <Route path="/dashboard/placements/dsa/month-1" element={<ProtectedRoute isLoggedIn={isLoggedIn}><Month1/></ProtectedRoute>} />
+        <Route path="/dashboard/placements/dsa/month-2" element={<ProtectedRoute isLoggedIn={isLoggedIn}><Month2 /></ProtectedRoute>} />
+        <Route path="/dashboard/placements/dsa/month-3" element={<ProtectedRoute isLoggedIn={isLoggedIn}><Month3 /></ProtectedRoute>} />
+        <Route path="/dashboard/placements/dsa/month-4" element={<ProtectedRoute isLoggedIn={isLoggedIn}><Month4 /></ProtectedRoute>} />
+        <Route path="/dashboard/placements/dsa/month-5" element={<ProtectedRoute isLoggedIn={isLoggedIn}><Month5 /></ProtectedRoute>} />
+        <Route path="/dashboard/placements/dsa/month-6" element={<ProtectedRoute isLoggedIn={isLoggedIn}><Month6 /></ProtectedRoute>} />
+        <Route path="/dashboard/placements/dsa/dsa-450" element={<ProtectedRoute isLoggedIn={isLoggedIn}><DSA450/></ProtectedRoute>} />
 
       </Routes>
 

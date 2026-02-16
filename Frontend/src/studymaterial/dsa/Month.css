@@ -1,0 +1,28 @@
+.month-container {
+  padding: 40px 20px;
+  background-color: #f9fafc;
+  min-height: 100vh;
+}
+
+.month-title {
+  text-align: center;
+  font-weight: 600 !important;
+  color: #1f2937;
+}
+
+.month-card {
+  border-radius: 16px !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08) !important;
+  transition: all 0.3s ease-in-out !important;
+  height: 100%;
+}
+
+.month-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12) !important;
+}
+
+.month-topic {
+  font-weight: 500;
+  color: #dc2626; /* DSA red theme */
+}

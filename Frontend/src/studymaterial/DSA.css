@@ -1,0 +1,55 @@
+.dsa-container {
+  padding: 40px 20px;
+  background-color: #f9fafc;
+  min-height: 100vh;
+}
+
+.dsa-title {
+  text-align: center;
+  font-weight: 600 !important;
+  color: #1f2937;
+}
+
+.dsa-subtitle {
+  text-align: center;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.dsa-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dsa-card {
+  border-radius: 16px !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08) !important;
+  transition: all 0.3s ease-in-out !important;
+  height: 100%;
+}
+
+.dsa-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12) !important;
+}
+
+.dsa-month-title {
+  font-weight: 600 !important;
+  color: #dc2626; /* DSA red theme */
+}
+
+.dsa-topics {
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.dsa-btn {
+  background-color: #dc2626 !important;
+  text-transform: none !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+}
+
+.dsa-btn:hover {
+  background-color: #b91c1c !important;
+}

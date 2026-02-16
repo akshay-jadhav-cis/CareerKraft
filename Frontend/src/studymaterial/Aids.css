@@ -1,0 +1,54 @@
+.aids-container {
+  padding: 40px 20px;
+  background-color: #f9fafc;
+  min-height: 100vh;
+}
+
+.aids-title {
+  text-align: center;
+  font-weight: 600 !important;
+  color: #1f2937;
+}
+
+.aids-subtitle {
+  text-align: center;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.aids-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.aids-card {
+  border-radius: 16px !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08) !important;
+  transition: 0.3s ease-in-out !important;
+  height: 100%;
+}
+
+.aids-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12) !important;
+}
+
+.aids-module-title {
+  font-weight: 600 !important;
+  color: #2563eb;
+}
+
+.aids-description {
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.aids-btn {
+  background-color: #2563eb !important;
+  text-transform: none !important;
+  border-radius: 8px !important;
+}
+
+.aids-btn:hover {
+  background-color: #1e40af !important;
+}

@@ -1,0 +1,66 @@
+.stats-container {
+  padding: 40px 20px;
+  background-color: #f9fafc;
+  min-height: 100vh;
+}
+
+.stats-title {
+  text-align: center;
+  font-weight: 600 !important;
+  color: #1f2937;
+}
+
+.stats-subtitle {
+  text-align: center;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.stats-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stats-card {
+  border-radius: 16px !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.3s ease-in-out !important;
+  height: 100%;
+}
+
+.stats-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.stats-day-title {
+  font-weight: 600 !important;
+  color: #4f46e5; /* Indigo academic theme */
+}
+
+.stats-task {
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.stats-btn-box {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stats-btn {
+  background-color: #4f46e5 !important;
+  text-transform: none !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+}
+
+.stats-btn:hover {
+  background-color: #4338ca !important;
+}
+
+.stats-resource-btn {
+  text-transform: none !important;
+  border-radius: 8px !important;
+}

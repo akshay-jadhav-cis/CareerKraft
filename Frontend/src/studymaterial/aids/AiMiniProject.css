@@ -1,0 +1,56 @@
+.capstone-container {
+  padding: 40px 20px;
+  background-color: #f9fafc;
+  min-height: 100vh;
+}
+
+.capstone-title {
+  text-align: center;
+  font-weight: 600 !important;
+  color: #1f2937;
+}
+
+.capstone-subtitle {
+  text-align: center;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.capstone-card {
+  border-radius: 16px !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.3s ease-in-out !important;
+  height: 100%;
+}
+
+.capstone-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.capstone-step-title {
+  font-weight: 600 !important;
+  color: #111827; /* Premium dark theme */
+}
+
+.capstone-description {
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.capstone-btn-box {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.capstone-btn {
+  background-color: #111827 !important;
+  text-transform: none !important;
+  border-radius: 8px !important;
+  padding: 10px 30px !important;
+  font-weight: 500 !important;
+}
+
+.capstone-btn:hover {
+  background-color: #000000 !important;
+}

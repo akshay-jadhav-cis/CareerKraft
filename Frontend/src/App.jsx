@@ -34,6 +34,12 @@ import Kubernettes from "./studymaterial/devops/TempKubernettes";
 import Cicd from "./studymaterial/devops/Cicd"
 import Aws from "./studymaterial/devops/TempAws";
 import MockDevopsTest from "./studymaterial/devops/MockDevopsTest";
+import ML from "./studymaterial/aids/ML";
+import Python from "./studymaterial/aids/Python";
+import DataAnalytics from "./studymaterial/aids/DataAnalytics";
+import Statistics from "./studymaterial/aids/Statistics";
+import DeepLearning from "./studymaterial/aids/DeepLearnig";
+import AiMiniProject from "./studymaterial/aids/AiMiniProject";
 function App() {
   const navigate = useNavigate();
 
@@ -155,9 +161,39 @@ function App() {
           path="/dashboard/placements/devops/kubernetes"
           element={<ProtectedRoute isLoggedIn={isLoggedIn}><Kubernettes /></ProtectedRoute>}
         />
-        <Route 
-        path="/dashboard/placements/devops/mock-test"
-        element={<ProtectedRoute isLoggedIn={isLoggedIn}><MockDevopsTest/></ProtectedRoute>}/>
+        <Route
+          path="/dashboard/placements/devops/mock-test"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><MockDevopsTest /></ProtectedRoute>} />
+        <Route
+          path="/dashboard/placements/ai-data-science/python"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Python/></ProtectedRoute>}
+        />
+
+        <Route
+          path="/dashboard/placements/ai-data-science/data-analytics"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><DataAnalytics/></ProtectedRoute>}
+        />
+
+        <Route
+          path="/dashboard/placements/ai-data-science/statistics"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Statistics/></ProtectedRoute>}
+        />
+
+        <Route
+          path="/dashboard/placements/ai-data-science/ml"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><ML/></ProtectedRoute>}
+        />
+
+        <Route
+          path="/dashboard/placements/ai-data-science/deep-learning"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><DeepLearning/></ProtectedRoute>}
+        />
+
+        <Route
+          path="/dashboard/placements/ai-data-science/capstone"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><AiMiniProject/></ProtectedRoute>}
+        />
+
       </Routes>
 
       <Feature visible={showFeatures} onClose={() => setShowFeatures(false)} />

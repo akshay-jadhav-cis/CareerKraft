@@ -1,0 +1,56 @@
+.git-container {
+  padding: 40px 20px;
+  background-color: #f9fafc;
+  min-height: 100vh;
+}
+
+.git-title {
+  text-align: center;
+  font-weight: 600 !important;
+  color: #1f2937;
+}
+
+.git-subtitle {
+  text-align: center;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.git-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.git-card {
+  border-radius: 16px !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08) !important;
+  transition: 0.3s ease-in-out !important;
+}
+
+.git-card:hover {
+  transform: translateY(-8px);
+}
+
+.git-day-title {
+  font-weight: 600 !important;
+  color: #111827;
+}
+
+.git-task {
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.git-btn-box {
+  display: flex;
+  gap: 10px;
+}
+
+.git-btn {
+  background-color: #111827 !important;
+  text-transform: none !important;
+}
+
+.git-resource-btn {
+  text-transform: none !important;
+}

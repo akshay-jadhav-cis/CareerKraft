@@ -1,0 +1,66 @@
+.aws-container {
+  padding: 40px 20px;
+  background-color: #f9fafc;
+  min-height: 100vh;
+}
+
+.aws-title {
+  text-align: center;
+  font-weight: 600 !important;
+  color: #1f2937;
+}
+
+.aws-subtitle {
+  text-align: center;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.aws-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.aws-card {
+  border-radius: 16px !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.3s ease-in-out !important;
+  height: 100%;
+}
+
+.aws-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.aws-day-title {
+  font-weight: 600 !important;
+  color: #f59e0b;   /* AWS orange theme */
+}
+
+.aws-task {
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.aws-btn-box {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.aws-btn {
+  background-color: #f59e0b !important;
+  text-transform: none !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+}
+
+.aws-btn:hover {
+  background-color: #d97706 !important;
+}
+
+.aws-resource-btn {
+  text-transform: none !important;
+  border-radius: 8px !important;
+}

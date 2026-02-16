@@ -1,0 +1,66 @@
+.cicd-container {
+  padding: 40px 20px;
+  background-color: #f9fafc;
+  min-height: 100vh;
+}
+
+.cicd-title {
+  text-align: center;
+  font-weight: 600 !important;
+  color: #1f2937;
+}
+
+.cicd-subtitle {
+  text-align: center;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.cicd-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cicd-card {
+  border-radius: 16px !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.3s ease-in-out !important;
+  height: 100%;
+}
+
+.cicd-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.cicd-day-title {
+  font-weight: 600 !important;
+  color: #10b981;  /* DevOps green theme */
+}
+
+.cicd-task {
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.cicd-btn-box {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cicd-btn {
+  background-color: #10b981 !important;
+  text-transform: none !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+}
+
+.cicd-btn:hover {
+  background-color: #059669 !important;
+}
+
+.cicd-resource-btn {
+  text-transform: none !important;
+  border-radius: 8px !important;
+}

@@ -1,0 +1,59 @@
+.kube-container {
+  padding: 40px 20px;
+  background-color: #f9fafc;
+  min-height: 100vh;
+}
+
+.kube-title {
+  text-align: center;
+  font-weight: 600 !important;
+  color: #1f2937;
+}
+
+.kube-subtitle {
+  text-align: center;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.kube-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.kube-card {
+  border-radius: 16px !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+.kube-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.kube-day-title {
+  font-weight: 600 !important;
+  color: #7c3aed;
+}
+
+.kube-task {
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.kube-btn-box {
+  display: flex;
+  gap: 10px;
+}
+
+.kube-btn {
+  background-color: #7c3aed !important;
+  text-transform: none !important;
+  border-radius: 8px !important;
+}
+
+.kube-resource-btn {
+  text-transform: none !important;
+  border-radius: 8px !important;
+}

@@ -15,15 +15,25 @@ import TwoFALogin from "./users/TwoFALogin";
 
 import { ThemeProvider } from "@mui/material";
 import theme from "./theme";
+
 import Placements from "./studymaterial/Placements";
 import Aids from "./studymaterial/Aids";
 import Devops from "./studymaterial/Devops";
 import DSA from "./studymaterial/DSA";
 import WebDevelopment from "./studymaterial/WebDevelopment";
+
 import Html from "./studymaterial/webdevelopment/Html";
 import Css from "./studymaterial/webdevelopment/CSS";
 import Js from "./studymaterial/webdevelopment/Js";
 
+// ✅ DevOps Submodules (MATCHING YOUR FILE NAMES EXACTLY)
+import Git from "./studymaterial/devops/TempGit";
+import Linux from "./studymaterial/devops/TempLinux";
+import Docker from "./studymaterial/devops/TempDocker";
+import Kubernettes from "./studymaterial/devops/TempKubernettes";
+import Cicd from "./studymaterial/devops/Cicd"
+import Aws from "./studymaterial/devops/TempAws";
+import MockDevopsTest from "./studymaterial/devops/MockDevopsTest";
 function App() {
   const navigate = useNavigate();
 
@@ -31,7 +41,6 @@ function App() {
   const [showAbouts, setShowAbouts] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // ✅ SINGLE SOURCE OF TRUTH
   const checkAuth = async () => {
     try {
       const res = await fetch("http://localhost:5000/users/check-auth", {
@@ -44,7 +53,6 @@ function App() {
     }
   };
 
-  // 🔁 Run once on app load
   useEffect(() => {
     checkAuth();
   }, []);
@@ -69,28 +77,16 @@ function App() {
       />
 
       <Routes>
+        {/* 🌍 PUBLIC ROUTES */}
         <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
-
-        <Route
-          path="/login"
-          element={<UserLogin onLogin={checkAuth} />}
-        />
-
+        <Route path="/login" element={<UserLogin onLogin={checkAuth} />} />
         <Route path="/signup" element={<UserSignup />} />
+        <Route path="/2fa-setup" element={<TwoFactorSetup onAuthSuccess={checkAuth} />} />
+        <Route path="/2fa-login" element={<TwoFALogin onAuthSuccess={checkAuth} />} />
 
+        {/* 🔒 Protected Dashboard */}
         <Route
-          path="/2fa-setup"
-          element={<TwoFactorSetup onAuthSuccess={checkAuth} />}
-        />
-
-        <Route
-          path="/2fa-login"
-          element={<TwoFALogin onAuthSuccess={checkAuth} />}
-        />
-
-        {/* 🔒 PROTECTED */}
-        <Route
-          path="/dashboard"
+          path="/dashboard/*"
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Dashboard />
@@ -98,14 +94,70 @@ function App() {
           }
         />
 
-        <Route path="/dashboard/placements" element={<Placements />} />
-        <Route path="/dashboard/placements/ai-data-science" element={<Aids />} />
-        <Route path="/dashboard/placements/devops" element={<Devops />} />
-        <Route path="/dashboard/placements/dsa" element={<DSA />} />
-        <Route path="/dashboard/placements/web-development" element={<WebDevelopment />} />
-        <Route path="/dashboard/placements/web-development/Html" element={<Html />} />
-        <Route path="/dashboard/placements/web-development/css" element={<Css />} />
-        <Route path="/dashboard/placements/web-development/js" element={<Js />} />
+        {/* 📚 Placement Modules */}
+        <Route
+          path="/dashboard/placements"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Placements /></ProtectedRoute>}
+        />
+        <Route
+          path="/dashboard/placements/ai-data-science"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Aids /></ProtectedRoute>}
+        />
+        <Route
+          path="/dashboard/placements/devops"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Devops /></ProtectedRoute>}
+        />
+        <Route
+          path="/dashboard/placements/dsa"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><DSA /></ProtectedRoute>}
+        />
+        <Route
+          path="/dashboard/placements/web-development"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><WebDevelopment /></ProtectedRoute>}
+        />
+
+        {/* 🌐 Web Development Submodules */}
+        <Route
+          path="/dashboard/placements/web-development/html"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Html /></ProtectedRoute>}
+        />
+        <Route
+          path="/dashboard/placements/web-development/css"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Css /></ProtectedRoute>}
+        />
+        <Route
+          path="/dashboard/placements/web-development/js"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Js /></ProtectedRoute>}
+        />
+
+        {/* 🚀 DevOps Submodules */}
+        <Route
+          path="/dashboard/placements/devops/linux"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Linux /></ProtectedRoute>}
+        />
+        <Route
+          path="/dashboard/placements/devops/git"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Git /></ProtectedRoute>}
+        />
+        <Route
+          path="/dashboard/placements/devops/docker"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Docker /></ProtectedRoute>}
+        />
+        <Route
+          path="/dashboard/placements/devops/Aws"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Aws /></ProtectedRoute>}
+        />
+        <Route
+          path="/dashboard/placements/devops/Cicd"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Cicd /></ProtectedRoute>}
+        />
+        <Route
+          path="/dashboard/placements/devops/kubernetes"
+          element={<ProtectedRoute isLoggedIn={isLoggedIn}><Kubernettes /></ProtectedRoute>}
+        />
+        <Route 
+        path="/dashboard/placements/devops/mock-test"
+        element={<ProtectedRoute isLoggedIn={isLoggedIn}><MockDevopsTest/></ProtectedRoute>}/>
       </Routes>
 
       <Feature visible={showFeatures} onClose={() => setShowFeatures(false)} />

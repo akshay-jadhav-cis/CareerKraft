@@ -1,0 +1,56 @@
+.linux-container {
+  padding: 40px 20px;
+  background-color: #f9fafc;
+  min-height: 100vh;
+}
+
+.linux-title {
+  text-align: center;
+  font-weight: 600 !important;
+  color: #1f2937;
+}
+
+.linux-subtitle {
+  text-align: center;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.linux-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.linux-card {
+  border-radius: 16px !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08) !important;
+  transition: 0.3s ease-in-out !important;
+}
+
+.linux-card:hover {
+  transform: translateY(-8px);
+}
+
+.linux-day-title {
+  font-weight: 600 !important;
+  color: #2563eb;
+}
+
+.linux-task {
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.linux-btn-box {
+  display: flex;
+  gap: 10px;
+}
+
+.linux-btn {
+  background-color: #2563eb !important;
+  text-transform: none !important;
+}
+
+.linux-resource-btn {
+  text-transform: none !important;
+}
